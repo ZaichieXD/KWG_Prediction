@@ -16,21 +16,20 @@ Feature Engineering: Lag and rolling averages are used to capture temporal sales
 Outlier Handling: Preprocessing includes identifying and mitigating data anomalies.
 ### Approach 🧠
 1. Libraries Used:
-  * Data Handling: Pandas, NumPy
-  * Visualization: Matplotlib
-  * Machine Learning: TensorFlow/Keras
-  * Preprocessing: Scikit-learn
-  * API: FastAPI for serving predictions
+   * Data Handling: Pandas, NumPy
+   * Visualization: Matplotlib
+   * Machine Learning: TensorFlow/Keras
+   * Preprocessing: Scikit-learn
+   * API: FastAPI for serving predictions
 
 2. Model Architectures:
-
-  * Weather Prediction:
-    * Built using LSTM layers for sequential data.
-    * Dense layers refine predictions with ReLU and linear activation functions.
-    * Dropout for regularization.
-  * Sales Forecasting:
-    * Combines LSTMs with feature-dense layers for time-series and categorical data.
-    * Regularization and adaptive learning rates prevent overfitting.
+   * Weather Prediction:
+      * Built using LSTM layers for sequential data.
+      * Dense layers refine predictions with ReLU and linear activation functions.
+      * Dropout for regularization.
+   * Sales Forecasting:
+      * Combines LSTMs with feature-dense layers for time-series and categorical data.
+      * Regularization and adaptive learning rates prevent overfitting.
       
 3. Training Optimization:
 
