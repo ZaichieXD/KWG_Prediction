@@ -34,10 +34,10 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
       
 3. Training Optimization:
 
- * Early stopping monitors validation performance.
- * ReduceLROnPlateau dynamically adjusts learning rates.
+   * Early stopping monitors validation performance.
+   * ReduceLROnPlateau dynamically adjusts learning rates.
 
 4. Feature Processing:
 
- * Weather model emphasizes temporal features like time differences, lags, and weather metrics.
- * Sales model focuses on seasonality, trends, and promotional influences.
+   * Weather model emphasizes temporal features like time differences, lags, and weather metrics.
+   * Sales model focuses on seasonality, trends, and promotional influences.
