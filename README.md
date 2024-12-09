@@ -24,9 +24,9 @@ Preprocessing: Scikit-learn
 API: FastAPI for serving predictions
 Model Architectures:
 
-  * Weather Prediction:
-    *Built using LSTM layers for sequential data.
-Dense layers refine predictions with ReLU and linear activation functions.
+ * Weather Prediction:
+   * Built using LSTM layers for sequential data.
+   * Dense layers refine predictions with ReLU and linear activation functions.
 Dropout for regularization.
 Sales Forecasting:
 Combines LSTMs with feature-dense layers for time-series and categorical data.
