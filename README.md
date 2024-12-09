@@ -18,7 +18,7 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
 Libraries Used:
 
 Data Handling: Pandas, NumPy
-Visualization: Matplotlib, Seaborn
+Visualization: Matplotlib
 Machine Learning: TensorFlow/Keras
 Preprocessing: Scikit-learn
 API: FastAPI for serving predictions
