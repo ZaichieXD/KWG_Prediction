@@ -31,22 +31,13 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
   * Sales Forecasting:
     * Combines LSTMs with feature-dense layers for time-series and categorical data.
     * Regularization and adaptive learning rates prevent overfitting.
-Training Optimization:
+      
+3. Training Optimization:
 
-Early stopping monitors validation performance.
-ReduceLROnPlateau dynamically adjusts learning rates.
-Feature Processing:
+ * Early stopping monitors validation performance.
+ * ReduceLROnPlateau dynamically adjusts learning rates.
 
-Weather model emphasizes temporal features like time differences, lags, and weather metrics.
-Sales model focuses on seasonality, trends, and promotional influences.
-## Requirements 🛠️
-Python 3.8+
-TensorFlow
-Pandas
-NumPy
-Scikit-learn
-FastAPI
-## Usage 🚀
-Both models are deployment-ready and optimized for real-time predictions. The FastAPI integration ensures a seamless serving process for new data inputs.
+4. Feature Processing:
 
-Contributions are welcome to further improve the models' performance or expand their capabilities!
+ * Weather model emphasizes temporal features like time differences, lags, and weather metrics.
+ * Sales model focuses on seasonality, trends, and promotional influences.
