@@ -42,17 +42,17 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
    * Sales model focuses on seasonality, trends, and promotional influences.
 
 How to install:  
-  Clone the repository
-  ``` git clone https://github.com/dennis774/dashboard-main-origin ```
+  &nbsp; Clone the repository  
+  &nbsp; ``` git clone https://github.com/dennis774/dashboard-main-origin ```
 
-  Change Directory
-  ``` cd KWG_Prediction ```
+  &nbsp;Change Directory  
+  &nbsp;``` cd KWG_Prediction ```
 
-  Install requirements
-  ``` pip install -r requirements ``` 
+  &nbsp;Install requirements  
+  &nbsp;``` pip install -r requirements ``` 
 
-  Run the app on port 8080
-  ``` fastapi dev models_api.py --port=8080 ```
+  &nbsp;Run the app on port 8080  
+  &nbsp;``` fastapi dev models_api.py --port=8080 ```
 
   
   
