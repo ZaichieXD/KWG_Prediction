@@ -43,16 +43,16 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
 
 How to install:
   Clone the repository
-    git clone [this repository](https://github.com/dennis774/dashboard-main-origin)
+  ``` git clone https://github.com/dennis774/dashboard-main-origin
 
   Change Directory
-    cd KWG_Prediction
+  ``` cd KWG_Prediction
 
   Install requirements
-    pip install -r requirements
+  ``` pip install -r requirements
 
   Run the app on port 8080
-    fastapi dev models_api.py --port=8080
+  ``` fastapi dev models_api.py --port=8080
 
   
   
