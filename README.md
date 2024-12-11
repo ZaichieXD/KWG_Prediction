@@ -41,7 +41,7 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
    * Weather model emphasizes temporal features like time differences, lags, and weather metrics.
    * Sales model focuses on seasonality, trends, and promotional influences.
 
-How to install:
+How to install:  
   Clone the repository
   ``` git clone https://github.com/dennis774/dashboard-main-origin ```
 
