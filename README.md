@@ -43,7 +43,7 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
 
 How to install:  
   &nbsp; Clone the repository  
-  &nbsp; ``` git clone https://github.com/dennis774/dashboard-main-origin ```
+  &nbsp; ``` git clone [https://github.com/dennis774/dashboard-main-origin](https://github.com/ZaichieXD/KWG_Prediction) ```
 
   &nbsp;Change Directory  
   &nbsp;``` cd KWG_Prediction ```
