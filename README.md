@@ -42,6 +42,7 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
    * Sales model focuses on seasonality, trends, and promotional influences.
 
 How to install:  
+  &nbsp; Install Python 3.12.7, Latest version python does not have tensorflow on pip
   &nbsp; Clone the repository  
   &nbsp; ``` git clone https://github.com/ZaichieXD/KWG_Prediction ```
 
