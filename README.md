@@ -49,4 +49,4 @@ Change Directory <br>
 Install Requirements <br>
 &nbsp; ``` pip install -r requirements.txt ```<br>
 Run the Code using FastAPI<br>
-&nbsp; ``` fastapi dev models_api.py --port=8080 ````<br>
+&nbsp; ``` fastapi dev models_api.py --port=8080 ```<br>
