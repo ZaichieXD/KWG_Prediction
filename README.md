@@ -41,6 +41,12 @@ Outlier Handling: Preprocessing includes identifying and mitigating data anomali
    * Weather model emphasizes temporal features like time differences, lags, and weather metrics.
    * Sales model focuses on seasonality, trends, and promotional influences.
 
-How to use :-
+How to use <br>
 Clone the repository <br>
-``` git clone https://github.com/ZaichieXD/KWG_Prediction.git  ``` <br>
+&nbsp;``` git clone https://github.com/ZaichieXD/KWG_Prediction.git  ``` <br>
+Change Directory <br>
+&nbsp; ``` cd KWG_Prediction ``` <br>
+Install Requirements <br>
+&nbsp; ``` pip install -r requirements.txt ```<br>
+Run the Code using FastAPI<br>
+&nbsp; ``` fastapi dev models_api.py --port=8080 ````<br>
