@@ -86,19 +86,19 @@ for i in range(1, 4):
     for col in columns_to_shift:
         main_df_data[f'{col}_{i}'] = main_df_data[col].shift(i)
 
+prediction_dates = pd.DataFrame(main_df_data['date'][-80:].reset_index(drop=True))
+
+actual_data = main_df_data[['date', 'total_orders', 'total_sales', 'total_profit', 'total_expenses']]
+actual_data = actual_data[-80:].reset_index(drop=True)
+
 # Drop the uneccesarry columns
 main_df_data = main_df_data.drop(['date'], axis=1)
 main_df_data = main_df_data.dropna().reset_index(drop=True)
 
-# Define the split ratios
-train_size = int(len(main_df_data) * 0.7)  # 70% for training
-val_size = int(len(main_df_data) * 0.15)  # 15% for validation
-test_size = len(main_df_data) - train_size - val_size  # 15% for testing
-
 # Split the data into train, validation, and test sets
-train_data = main_df_data[:train_size]
-val_data = main_df_data[train_size:train_size+val_size]
-test_data = main_df_data[train_size+val_size:]
+train_data = main_df_data[:-160]
+val_data = main_df_data[-160:-80]
+test_data = main_df_data[-80:]
 
 # Check the split
 print(f"Training data shape: {train_data.shape}")
@@ -142,37 +142,23 @@ model = load_model('kuwago_prediction_model.keras')
 
 predictions = model.predict(x_test)
 
-print(y_test.shape)
-print(predictions.shape)
-
-print(test_scaled.shape)
-
 def reconstruct_original_shape(x_test, y_predictions, original_data, target_columns_ref):
-    # Number of time_steps used during sequence creation
+    # Include the first `time_steps` rows from the original data
     time_steps = original_data.shape[0] - x_test.shape[0]
+    missing_rows = original_data[:time_steps]  # First `time_steps` rows
 
-    # Step 1: Take the first `time_steps` rows from the original data
-    missing_rows = original_data[:time_steps]
-
-    # Step 2: Align the predictions with the last row of each sequence in x_test
+    # Reconstruct rows with predictions
     reconstructed_rows = []
     for i in range(len(y_predictions)):
-        # Take the last row of the sequence
-        last_row = x_test[i, -1]  # Shape: (24,)
-
-        # Remove target columns from the last row
-        filtered_last_row = np.delete(last_row, target_columns_ref)  # Shape: (20,)
-
-        # Create a full row with predictions inserted at the target column positions
-        full_row = np.insert(filtered_last_row, target_columns_ref, y_predictions[i])  # Shape: (24,)
-
+        last_row = x_test[i, -1]  # Shape: (features,)
+        filtered_last_row = np.delete(last_row, target_columns_ref)  # Shape: (features - targets,)
+        full_row = np.insert(filtered_last_row, target_columns_ref, y_predictions[i])  # Shape: (features,)
         reconstructed_rows.append(full_row)
 
-    # Convert reconstructed rows to numpy array
     reconstructed_rows = np.array(reconstructed_rows)
 
-    # Step 3: Concatenate the missing rows (original rows) and the reconstructed rows
-    full_data = np.vstack([missing_rows, reconstructed_rows])  # Shape: (120, 24)
+    # Concatenate the first rows with reconstructed predictions
+    full_data = np.vstack([missing_rows, reconstructed_rows])
 
     return full_data
 
@@ -185,6 +171,52 @@ np.set_printoptions(suppress=True)
 reconstructed_original_scale = scaler.inverse_transform(original_scaled_data)
 reversed_y_data = scaler.inverse_transform(test_scaled)
 
-# Print the original scale data
-print(reconstructed_original_scale[:, :4])
-print(reversed_y_data[:, :4])
+total_orders_result = reconstructed_original_scale[:, 0].tolist()
+total_sales_result = reconstructed_original_scale[:, 1].tolist()
+total_expenses_result = reconstructed_original_scale[:, 2].tolist()
+total_profit_result = reconstructed_original_scale[:, 3].tolist()
+
+series_total_orders = pd.Series(total_orders_result, name="Total Orders Prediction")
+series_total_sales = pd.Series(total_sales_result, name="Total Sales Prediction")
+series_total_expenses = pd.Series(total_expenses_result, name="Total Expenses Prediction")
+series_total_profit = pd.Series(total_profit_result, name="Total Profit Prediction")
+
+combined_series = pd.concat([series_total_orders, series_total_sales, series_total_expenses, series_total_profit], axis=1)
+
+complete_prediction = prediction_dates.merge(combined_series, left_index=True, right_index=True)
+
+plt.figure(figsize=(16,5))
+plt.plot(actual_data['date'], actual_data['total_orders'], label='Actual Number of Sales')
+plt.plot(complete_prediction['date'], complete_prediction['Total Orders Prediction'], label='Total Orders Prediction')
+plt.legend()
+plt.xlabel('Date')
+plt.ylabel('Total Orders')
+plt.title('Total Orders Prediction')
+plt.show()
+
+plt.figure(figsize=(16,5))
+plt.plot(actual_data['date'], actual_data['total_sales'], label='Actual Sales')
+plt.plot(complete_prediction['date'], complete_prediction['Total Sales Prediction'], label='Total Sales Prediction')
+plt.legend()
+plt.xlabel('Date')
+plt.ylabel('Total Sales')
+plt.title('Total Sales Prediction')
+plt.show()
+
+plt.figure(figsize=(16,5))
+plt.plot(actual_data['date'], actual_data['total_expenses'], label='Actual Expenses')
+plt.plot(complete_prediction['date'], complete_prediction['Total Expenses Prediction'], label='Total Expenses Prediction')
+plt.legend()
+plt.xlabel('Date')
+plt.ylabel('Total Expenses')
+plt.title('Total Expenses Prediction')
+plt.show()
+
+plt.figure(figsize=(16,5))
+plt.plot(actual_data['date'], actual_data['total_profit'], label='Actual Profit')
+plt.plot(complete_prediction['date'], complete_prediction['Total Profit Prediction'], label='Total Profit Prediction')
+plt.legend()
+plt.xlabel('Date')
+plt.ylabel('Total Profit')
+plt.title('Total Profit Prediction')
+plt.show()

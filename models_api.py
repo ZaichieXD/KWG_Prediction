@@ -1,20 +1,25 @@
 from fastapi import FastAPI
-
-import kwago_model_generator as kwago_model_gen
-from kwago_model_prediction import KwagoPredictionModel
+import pandas as pd
+from kwago_model_prediction import KuwagoPredictionModel
 
 app = FastAPI()
-kwago_model = KwagoPredictionModel()
+kuwago_model = KuwagoPredictionModel()
 
 @app.get("/")
 def health_check():
     return {'health_check': 'OK'}
 
+@app.get("/kwago_update")
+def kuwago_update():
+    kuwago_model.update_predicitons()
+    return {'update-predictions': 'complete'}
+
 @app.get("/kwago_predict")
-def kwago_predict():
-    kwago_data = kwago_model.run_predictions('2024-')
-    kwago_data['date'].dt.strftime("%Y-%m-%d")
-    json_data = kwago_data.to_dict(orient="records")
+def kuwago_predict():
+    # Load the CSV into a pandas DataFrame
+    df = pd.read_csv('future_predictions.csv')
+    # Convert the DataFrame to a dictionary
+    json_data = df.to_dict(orient='records')
     return json_data
 
 
